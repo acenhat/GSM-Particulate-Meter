@@ -6,12 +6,14 @@
 //To change pins for Software Serial, use the two lines in GSM.cpp.   SIMCOM SIM900 uses Pin 7 & 8
 //To change pins for Poweron & Reset (effects begin()), change the lines in GSM.h
 
-
+//Original code from:
 //GSM Shield for Arduino
 //www.open-electronics.org
 //this code is based on the example of Arduino Labs.
-
 //Simple sketch to start a connection as client.
+
+//Updated by Alexander Waite Mitchell
+//SDS011 Dust Sensor Reader & Update to Thingspeak server over GSM
 
 InetGSM inet;
 
