@@ -4,7 +4,9 @@
 //#include "sms.h"
 //#include "call.h"
 
-//To change pins for Software Serial, use the two lines in GSM.cpp.
+//To change pins for Software Serial, use the two lines in GSM.cpp.   SIMCOM SIM900 uses Pin 7 & 8
+//To change pins for Poweron & Reset (effects begin()), change the lines in GSM.h
+
 
 //GSM Shield for Arduino
 //www.open-electronics.org
@@ -21,9 +23,7 @@ int numdata;
 char inSerial[50];
 int i=0;
 boolean started=false;
-char apiKey[] = "B-PXnIsZp_s6T59MNvIyJlqnKR2SAKxVdlhpUmFDalR2ST0g";
-long feedId = 65329;
-char datastreamId[] = "1";
+char apiKey[] = "put_your_api_key_here";
 int dataToSend=30;
 
 
