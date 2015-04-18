@@ -1,4 +1,4 @@
-# Sim900-Particulate-Sensor
+# GSM-Particulate-Sensor, using Arduino platform
 
 Particulate 2.5PM, 10PM Arduino Sensor using a SIMCOM Sim900 GPRS 
 
