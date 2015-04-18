@@ -1,8 +1,7 @@
 #include "SIM900.h"
 #include <SoftwareSerial.h>
 #include "inetGSM.h"
-//#include "sms.h"
-//#include "call.h"
+
 
 //To change pins for Software Serial, use the two lines in GSM.cpp.   SIMCOM SIM900 uses Pin 7 & 8
 //To change pins for Poweron & Reset (effects begin()), change the lines in GSM.h
@@ -15,8 +14,7 @@
 //Simple sketch to start a connection as client.
 
 InetGSM inet;
-//CallGSM call;
-//SMSGSM sms;
+
 
 char msg[50];
 int numdata;
@@ -80,17 +78,7 @@ void updateThingSpeak(String dataToSend)
 {
 if(inet.connectTCP(thingSpeakAddress, 80))
   {
-//  Serial.println("Connesso a Cosm"); 
-  
-/* gsm.SimpleWrite("GET ");
-  gsm.SimpleWrite("/");
-  gsm.SimpleWrite(" HTTP/1.0\nHost: ");
-  gsm.SimpleWrite("www.google.it");
-  gsm.SimpleWrite("\n");
-  gsm.SimpleWrite("User-Agent: Arduino");
-  gsm.SimpleWrite("\n\n");
-  //inet.dettachGPRS();
- */
+
     gsm.SimpleWrite("POST /update HTTP/1.1\n");
     gsm.SimpleWrite("Host: api.thingspeak.com\n");
     gsm.SimpleWrite("Connection: close\n");
