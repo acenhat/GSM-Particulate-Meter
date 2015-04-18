@@ -23,9 +23,13 @@ int numdata;
 char inSerial[50];
 int i=0;
 boolean started=false;
-char apiKey[] = "put_your_api_key_here";
 int dataToSend=30;
 
+// ThingSpeak Settings
+
+char thingSpeakAddress[] = "api.thingspeak.com";
+const int updateThingSpeakInterval = 16 * 1000; 
+char apiKey[] = "put_your_api_key_here";
 
 
 void setup()
@@ -48,7 +52,7 @@ void setup()
     //GPRS attach, put in order APN, username and password.
     //If no needed auth let them blank.
     
-    if (inet.attachGPRS("internet.wind", "", ""))
+    if (inet.attachGPRS("put_your_APN_here", "", ""))
       Serial.println("status=ATTACHED");
     else Serial.println("status=ERROR");
     delay(1000);
@@ -71,9 +75,11 @@ void setup()
    */
    };
   //
-
-if(inet.connectTCP("api.cosm.com", 80))
-
+}
+void updateThingSpeak(String dataToSend)
+{
+if(inet.connectTCP(thingSpeakAddress, 80))
+  {
 //  Serial.println("Connesso a Cosm"); 
   
 /* gsm.SimpleWrite("GET ");
@@ -85,29 +91,43 @@ if(inet.connectTCP("api.cosm.com", 80))
   gsm.SimpleWrite("\n\n");
   //inet.dettachGPRS();
  */
- gsm.SimpleWrite("POST /v2/feeds/");
-    gsm.SimpleWrite(feedId);
-    gsm.SimpleWrite("/datastreams/");
-    gsm.SimpleWrite(datastreamId);
-    gsm.SimpleWrite(".xml?_method=put");
-    gsm.SimpleWrite(".csv HTTP/1.1\n");
+    gsm.SimpleWrite("POST /update HTTP/1.1\n");
+    gsm.SimpleWrite("Host: api.thingspeak.com\n");
+    gsm.SimpleWrite("Connection: close\n");
+    gsm.SimpleWrite("X-THINGSPEAKAPIKEY: "+APIKey+"\n");
+    gsm.SimpleWrite("Content-Type: application/x-www-form-urlencoded\n");
     gsm.SimpleWrite("Host: api.cosm.com\n");
-
-    gsm.SimpleWrite("X-ApiKey: ");
-    gsm.SimpleWrite(apiKey);
-    gsm.SimpleWrite("\n");
     gsm.SimpleWrite("Content-Length: ");
-
-    
-    gsm.SimpleWriteln("ignoto");
-
-   
-  gsm.SimpleWrite(dataToSend);
-  gsm.SimpleWrite("\n\n");
+    gsm.SimpleWrite(dataToSend.length());
+    gsm.SimpleWrite("\n\n");
+    gsm.SimpleWrite(dataToSend);
   
+ lastConnectionTime = millis();
+if (client.connected())
+{
+Serial.println("Connecting to ThingSpeak...");
+Serial.println();
+failedCounter = 0;
+}
+else
+{
+failedCounter++;
+Serial.println("Connection to ThingSpeak failed ("+String(failedCounter, DEC)+")");
+Serial.println();
+}
+}
+else
+{
+failedCounter++;
+Serial.println("Connection to ThingSpeak Failed ("+String(failedCounter, DEC)+")");
+Serial.println();
+lastConnectionTime = millis();
+}
+}
+
 
    
-  }
+  
 /*  else{ 
     
     Serial.println("Nonn connesso!!!");
