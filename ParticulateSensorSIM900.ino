@@ -1,3 +1,12 @@
+/*
+Original code from:		
+GSM Shield for Arduino		
+www.open-electronics.org		
+this code is based on the example of Arduino Labs.		
+*/
+
+
+
 #include "SIM900.h"
 #include <SoftwareSerial.h>
 #include "inetGSM.h"
