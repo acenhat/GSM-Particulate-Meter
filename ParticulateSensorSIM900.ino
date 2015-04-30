@@ -38,7 +38,7 @@ char datastreamId[] = "1";
 
 // ThingSpeak Settings
 char thingSpeakAddress[] = "api.thingspeak.com";
-char writeAPIKey[] = "HF3Y3SP6GU2V9LB2";
+char writeAPIKey[] = "";
 const int updateThingSpeakInterval = 60 * 1000;      // Time interval in milliseconds to update ThingSpeak (number of seconds * 1000 = interval)
 char sentMsg[50];
 
